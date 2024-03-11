@@ -1,8 +1,7 @@
-package com.kekulta.dummyproducts.features.list.data.mappers
+package com.kekulta.dummyproducts.features.list.domain.models
 
 import androidx.core.net.toUri
 import com.kekulta.dummyproducts.features.list.data.models.ProductDto
-import com.kekulta.dummyproducts.features.list.domain.models.ProductDm
 import logcat.logcat
 
 class ProductDmMapper() {

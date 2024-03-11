@@ -1,8 +1,8 @@
 package com.kekulta.dummyproducts.features.list.data.impl
 
-import com.kekulta.dummyproducts.features.main.api.NetworkDataStore
+import com.kekulta.dummyproducts.features.list.data.api.ProductsDataStore
 import com.kekulta.dummyproducts.features.list.data.mappers.PageDmMapper
-import com.kekulta.dummyproducts.features.list.domain.exceptions.IncorrectPageException
+import com.kekulta.dummyproducts.features.shared.exceptions.IncorrectPageException
 import com.kekulta.dummyproducts.features.list.domain.repos.PageRepo
 import com.kekulta.dummyproducts.features.list.domain.models.PageDm
 import com.kekulta.dummyproducts.features.shared.AbstractCoroutineRepository
@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class PageRepoImpl(
-    private val datastore: NetworkDataStore,
+    private val datastore: ProductsDataStore,
     private val pageDmMapper: PageDmMapper
 ) : AbstractCoroutineRepository(),
     PageRepo {

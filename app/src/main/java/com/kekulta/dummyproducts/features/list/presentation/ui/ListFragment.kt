@@ -3,6 +3,7 @@ package com.kekulta.dummyproducts.features.list.presentation.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,8 +15,10 @@ import com.kekulta.dummyproducts.features.list.presentation.recycler.BottomOffse
 import com.kekulta.dummyproducts.features.list.presentation.recycler.GridSpacingItemDecoration
 import com.kekulta.dummyproducts.features.list.presentation.recycler.ProductsRecyclerAdapter
 import com.kekulta.dummyproducts.features.shared.utils.dip
+import com.kekulta.dummyproducts.features.shared.utils.setNavBarColor
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.google.android.material.R as Rm
 
 class ListFragment : Fragment(R.layout.fragment_list) {
 
@@ -24,6 +27,13 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setNavBarColor(Rm.attr.colorSurfaceContainerHighest)
+        requireActivity().onBackPressedDispatcher.addCallback {
+            if (!viewModel.prevPage()) {
+                requireActivity().finish()
+            }
+        }
 
         val recAdapter = ProductsRecyclerAdapter()
 
@@ -41,7 +51,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
 
         lifecycleScope.launch {
-
             viewModel.observeState().collect { state ->
                 recAdapter.submitList(state.content)
                 binding.bottomBar.bind(state.pagingState)

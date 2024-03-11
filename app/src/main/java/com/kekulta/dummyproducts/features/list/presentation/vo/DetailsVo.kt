@@ -1,17 +1,17 @@
-package com.kekulta.dummyproducts.features.list.domain.models
+package com.kekulta.dummyproducts.features.list.presentation.vo
 
 import android.net.Uri
 
-data class ProductDm(
+data class DetailsVo(
     val id: Int,
     val title: String,
     val description: String,
-    val thumbnail: Uri,
+    val images: List<Uri>,
+    val recommendations: List<ProductPreviewVo>,
     val price: Double? = null,
-    val discountPercentage: Double? = null,
+    val oldPrice: Double? = null,
     val rating: Double? = null,
     val stock: Int? = null,
     val brand: String? = null,
     val category: String? = null,
-    val images: List<String>? = null,
 )

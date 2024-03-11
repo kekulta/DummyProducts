@@ -4,61 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:parentTag="com.google.android.material.card.MaterialCardView">
+    android:background="@drawable/card_background"
+    android:backgroundTint="?colorSurfaceContainerLow"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <!-- Media -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/product_carousel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_container"
+        app:layout_constraintDimensionRatio="W,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        app:srcCompat="@android:color/darker_gray" />
+
+    <LinearLayout
+        android:id="@+id/text_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_carousel">
 
-        <!-- Media -->
-        <ImageView
-            android:id="@+id/product_thumbnail"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/thumbnail_background"
+        <TextView
+            android:id="@+id/product_old_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/carousel_background"
             android:backgroundTint="?colorSurfaceContainer"
-            android:clipToOutline="true"
-            android:scaleType="fitCenter"
-            app:circularflow_radiusInDP="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/text_container"
-            app:layout_constraintDimensionRatio="W,1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread_inside"
-            app:srcCompat="@android:color/darker_gray" />
+            android:padding="3dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="12121"
+            android:textAppearance="?attr/textAppearanceTitleSmall"
+            android:visibility="invisible" />
 
         <LinearLayout
-            android:id="@+id/text_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/product_thumbnail">
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/product_title"
+                android:id="@+id/product_new_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textAppearance="?attr/textAppearanceTitleMedium" />
+                android:layout_marginTop="4dp"
+                android:background="@drawable/carousel_background"
+                android:backgroundTint="?colorSurfaceContainerHigh"
+                android:padding="4dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:text="123"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:visibility="invisible" />
 
-            <TextView
-                android:id="@+id/product_description"
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ellipsize="end"
-                android:lines="3"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:layout_gravity="center|end"
+                android:background="@drawable/thumbnail_background"
+                android:backgroundTint="?colorSurfaceContainerHigh"
+                android:padding="5dp"
+                android:visibility="invisible">
 
+                <RatingBar
+                    android:id="@+id/product_rating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+
+                    />
+            </FrameLayout>
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/product_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="?attr/textAppearanceTitleMedium" />
+
+        <TextView
+            android:id="@+id/product_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?android:attr/textColorSecondary" />
+
+    </LinearLayout>
 
 </merge>

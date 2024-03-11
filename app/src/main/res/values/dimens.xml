@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="product_card_corner_radius">16dp</dimen>
+    <dimen name="product_preview_corner_radius">28dp</dimen>
+    <dimen name="product_card_corner_radius">32dp</dimen>
+    <dimen name="carousel_corner_radius">28dp</dimen>
+    <dimen name="carousel_margin">8dp</dimen>
     <dimen name="bottombar_corner_radius">24dp</dimen>
     <dimen name="bottombar_vertical_size">25sp</dimen>
     <dimen name="bottombar_buttons_size">20sp</dimen>

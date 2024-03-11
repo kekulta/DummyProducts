@@ -1,19 +1,17 @@
 package com.kekulta.dummyproducts.features.list.domain.repos
 
-import com.kekulta.dummyproducts.features.list.domain.exceptions.UnknownServerException
-import com.kekulta.dummyproducts.features.list.domain.formatters.ListStateFormatter
-import com.kekulta.dummyproducts.features.list.presentation.vo.ListState
+import com.kekulta.dummyproducts.features.list.domain.models.PageDm
 import com.kekulta.dummyproducts.features.shared.AbstractCoroutineRepository
 import com.kekulta.dummyproducts.features.shared.RerunType
+import com.kekulta.dummyproducts.features.shared.exceptions.UnknownServerException
 import logcat.logcat
 
 class PageCacheRepository(
     private val pageRepository: PageRepo,
-    private val listStateFormatter: ListStateFormatter,
 ) : AbstractCoroutineRepository() {
-    private val pageCache = mutableMapOf<Int, ListState>()
+    private val pageCache = mutableMapOf<Int, PageDm>()
 
-    fun getCachePage(page: Int): ListState? {
+    fun getCachePage(page: Int): PageDm? {
         return pageCache[page]
     }
 
@@ -23,15 +21,14 @@ class PageCacheRepository(
         }
     }
 
-    suspend fun updateCacheSync(page: Int): Result<ListState> {
+    suspend fun updateCacheSync(page: Int): Result<PageDm> {
         val res = pageRepository.getPage(page)
         val pageRes = res.getOrNull()
 
         return if (res.isSuccess && pageRes != null) {
-            val new = listStateFormatter.format(pageRes)
 
-            pageCache[page] = new
-            Result.success(new)
+            pageCache[page] = pageRes
+            Result.success(pageRes)
         } else {
             logcat { "Request failed: ${res.exceptionOrNull()}" }
             Result.failure(res.exceptionOrNull() ?: UnknownServerException())
