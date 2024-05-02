@@ -1,4 +1,4 @@
-# AndroidBand
+# DummyProject
 
 DummyProject is a simple ListApp based on Dummyjson.com API
 
